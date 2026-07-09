@@ -1,0 +1,78 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a0a2e;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 1rem;
+  color: #1a0a2e;
+  background: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.12);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid rgba(124, 58, 237, 0.14);
+  border-radius: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+  background: #ffffff;
+  box-shadow: 0 14px 32px rgba(26, 10, 46, 0.08);
+}
+
+.option {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.option:hover,
+.activeOption {
+  background: #eff6ff;
+}
+
+.highlight {
+  background: #fde68a;
+  color: #111827;
+  padding: 0;
+}
+
+.emptyState {
+  padding: 10px 12px;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .input,
+  .option,
+  .emptyState {
+    font-size: 0.9rem;
+  }
+}

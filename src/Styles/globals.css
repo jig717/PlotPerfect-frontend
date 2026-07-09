@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+:root {
+  /* White + Violet theme */
+  --bg: #ffffff;
+  --bg2: #f9f9ff;
+  --bg3: #f0eeff;
+  --bg4: #e8e4ff;
+  --bg5: #ddd8ff;
+  --pu: #7c3aed;
+  --pu2: #a78bfa;
+  --pu3: #c4b5fd;
+  --pu4: #6d28d9;
+  --t: #1a0a2e;
+  --t2: rgba(26, 10, 46, 0.7);  
+  --t3: rgba(26, 10, 46, 0.4);
+  --b: rgba(124, 58, 237, 0.15);
+  --b2: rgba(124, 58, 237, 0.3);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideR {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideL {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(1.8); }
+}
+@keyframes gradShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(124, 58, 237, 0.25); }
+  50% { border-color: rgba(124, 58, 237, 0.65); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-22px) scale(1.06); }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.6; }
+}
+
+/* Apply theme to body */
+body {
+  background-color: var(--bg);
+  color: var(--t);
+  font-family: 'DM Sans', sans-serif;
+}

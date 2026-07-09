@@ -1,0 +1,22 @@
+.wrapper {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+}
+
+.selectedCity {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #1f2937;
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    padding: 12px;
+    gap: 12px;
+  }
+}
