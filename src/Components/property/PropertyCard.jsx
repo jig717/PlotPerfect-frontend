@@ -39,7 +39,25 @@ const fallbackAmenities = ['Parking', 'Security', 'Lift']
 
 const getImageUrl = (image, width = 900, height = 700) => {
   if (!image) return null
-  if (String(image).startsWith('http')) return image
+  const str = String(image)
+
+  // If the image is already a full URL, try to route Cloudinary images through the backend proxy
+  if (str.startsWith('http')) {
+    try {
+      const parsed = new URL(str)
+      // If this is a Cloudinary-hosted asset, proxy it through the backend to avoid tracking-prevention
+      if (parsed.hostname.includes('res.cloudinary.com')) {
+        const segments = parsed.pathname.split('/')
+        const filename = segments[segments.length - 1]
+        const backend = import.meta.env.VITE_APP_URL || ''
+        if (backend) return `${backend.replace(/\/$/, '')}/images/${filename}`
+      }
+    } catch (e) {
+      // fall back to original URL if parsing fails
+    }
+    return str
+  }
+
   if (!CLOUD_NAME) return null
   return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/w_${width},h_${height},c_fill,q_auto,f_auto/${image}`
 }
@@ -134,7 +152,6 @@ const resolvePropertyId = (property) => property._id || property.id || null
 
 export default function PropertyCard({
   property,
-  index = 0,
   isFavorite,
   onToggleFavorite,
   className = '',
@@ -352,7 +369,7 @@ export default function PropertyCard({
           </div>
         )}
 
-        <div className={`absolute inset-0 bg-gradient-to-t ${accent.glow}`} />
+        <div className={`absolute inset-0 bg-linear-to-t ${accent.glow}`} />
 
         <div className="absolute left-4 top-4 flex items-center gap-2">
           <span className={`rounded ${badgeStyle} px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white`}>
@@ -455,7 +472,7 @@ export default function PropertyCard({
               event.stopPropagation()
               openProperty()
             }}
-            className={`rounded-lg bg-gradient-to-r px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105 ${accent.button} ${accent.ring}`}
+            className={`rounded-lg bg-linear-to-r px-5 py-3 text-sm font-semibold text-white transition hover:brightness-105 ${accent.button} ${accent.ring}`}
           >
             View Details
           </button>
