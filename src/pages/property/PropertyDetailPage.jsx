@@ -138,10 +138,15 @@ const getRazorpayLimitMessage = (label = "payment", paymentMethod = "upi") => {
 const isRazorpayAmountLimitError = (error) => {
   const reason = String(error?.reason || "").toLowerCase();
   const description = String(error?.description || "").toLowerCase();
+  const source = String(error?.source || "").toLowerCase();
   return (
     reason === "invalid_amount" ||
+    reason === "step_up_required" ||
     description.includes("amount exceeds") ||
-    description.includes("maximum amount")
+    description.includes("maximum amount") ||
+    description.includes("maximum full amount") ||
+    description.includes("maximum") ||
+    (source === "customer" && description.includes("net banking"))
   );
 };
 
@@ -1838,7 +1843,7 @@ function FullPaymentModal({ property, onClose, onSuccess }) {
       if (isValidEmail(buyerEmail)) prefill.email = buyerEmail;
       if (buyerContact) prefill.contact = buyerContact;
 
-      console.info("[FullPaymentModal] Initializing Razorpay Checkout:", {
+      console.debug("[FullPaymentModal] Initializing Razorpay Checkout:", {
         key: razorpayKeyId ? `${razorpayKeyId.substring(0, 8)}...` : "MISSING",
         orderId: order?.id,
         amount: order?.amount,
