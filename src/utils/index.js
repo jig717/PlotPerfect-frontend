@@ -46,7 +46,7 @@ export const resolveApiAssetUrl = (path = '') => {
     return path
   }
 
-  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3400'
+  const baseUrl = import.meta.env.VITE_APP_URL || 'http://localhost:3400'
   const normalizedBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
   const normalizedPath = String(path).startsWith('/') ? path : `/${path}`
   return `${normalizedBase}${normalizedPath}`

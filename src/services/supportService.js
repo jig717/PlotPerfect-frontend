@@ -1,27 +1,12 @@
-import axios from "axios";
+import api from './api';
 
-const API = "http://localhost:3400/api/support";
+const API = "/support";
 
-const getAllTickets = () =>
-  axios.get(API, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+const getAllTickets = () => api.get(API);
 
-const updateTicket = (id, data) =>
-  axios.put(`${API}/${id}`, data, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+const updateTicket = (id, data) => api.put(`${API}/${id}`, data);
 
-const createTicket = (data) =>
-  axios.post(API, data, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+const createTicket = (data) => api.post(API, data);
 
 export const supportService = {
   getAllTickets,

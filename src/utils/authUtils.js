@@ -14,7 +14,7 @@ const OAUTH_CONFIG = {
  */
 export const handleGoogleLogin = (toast = null) => {
   // Backend Google OAuth endpoint – assumes your backend will handle the full OAuth flow
-  const backendAuthUrl = `${import.meta.env.REACT_APP_API_URL || 'http://localhost:3400'}/auth/google`;
+  const backendAuthUrl = `${import.meta.env.VITE_APP_URL || 'http://localhost:3400'}/auth/google`;
 
   if (toast) {
     toast.info('Redirecting to Google...');
