@@ -11,11 +11,11 @@ import visitService from "../../services/visitService";
 const CLOUD_NAME = import.meta.env.CLOUDINARY_CLOUD_NAME;
 const LOGO_URL = "https://checkout.razorpay.com/v1/logo.png"; // Fallback placeholder
 const BLOCKED_LOOPBACK_IMAGE = /^http:\/\/(localhost|127(?:\.\d{1,3}){3}|0\.0\.0\.0)(:\d+)?\//i;
-const MAX_ADVANCE_PAYMENT_AMOUNT = 100000;
+const MAX_ADVANCE_PAYMENT_AMOUNT = 1000000;
 const RAZORPAY_PAYMENT_METHODS = {
-  upi: { label: "UPI", limit: 100000 },
+  upi: { label: "UPI", limit: 1000000 },
   card: { label: "Card", limit: Infinity },
-  netbanking: { label: "Net Banking", limit: 500000 },
+  netbanking: { label: "Net Banking", limit: 5000000 },
 };
 
 // MOCK only for development when backend is down
@@ -1282,16 +1282,16 @@ export default function PropertyDetailPage() {
                 <Section title="Amenities">
                   <AmenityStatsStrip property={property} />
                   {property.amenities?.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {property.amenities.map((a) => (
-                      <span
-                        key={a}
-                        className="bg-[#f0eeff] text-[#7c3aed] text-sm px-3 py-1.5 rounded-lg"
-                      >
-                        ✓ {a}
-                      </span>
-                    ))}
-                  </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {property.amenities.map((a) => (
+                        <span
+                          key={a}
+                          className="bg-[#f0eeff] text-[#7c3aed] text-sm px-3 py-1.5 rounded-lg"
+                        >
+                          ✓ {a}
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </Section>
               )}
@@ -1843,7 +1843,7 @@ function FullPaymentModal({ property, onClose, onSuccess }) {
       if (isValidEmail(buyerEmail)) prefill.email = buyerEmail;
       if (buyerContact) prefill.contact = buyerContact;
 
-      console.debug("[FullPaymentModal] Initializing Razorpay Checkout:", {
+      console.info("[FullPaymentModal] Initializing Razorpay Checkout:", {
         key: razorpayKeyId ? `${razorpayKeyId.substring(0, 8)}...` : "MISSING",
         orderId: order?.id,
         amount: order?.amount,
@@ -1961,7 +1961,7 @@ function FullPaymentModal({ property, onClose, onSuccess }) {
           {exceedsCheckoutLimit && (
             <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800">
               {getRazorpayLimitMessage(amountLabel.toLowerCase(), paymentMethod)}
-              </div>
+            </div>
           )}
         </div>
 
